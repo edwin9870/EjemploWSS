@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project default="all">
+	<target name="all" depends="clean,build-service, generate-from-wsdl,deploy" />
+	<target name="clean">
+		<delete dir="output" />
+	</target>
+	<target name="build-service">
+
+	</target>
+	<taskdef name="wsdlc" classname="weblogic.wsee.tools.anttasks.WsdlcTask">
+		<classpath>
+			<path id="weblogic.classpath">
+				<pathelement path="WEBLOGIC_HOME" />
+				<fileset dir="/home/yoya/Oracle/Middleware/Oracle_Home/wlserver/server/lib">
+					<include name="weblogic.jar" />
+				</fileset>
+			</path>
+		</classpath>
+	</taskdef>	
+
+	<target name="generate-from-wsdl">
+		<wsdlc 
+			srcWsdl="/home/yoya/workspace/EjemploWSS/src/main/java/wsdl/Edwin.wsdl" 
+			destJwsDir="/home/yoya/workspace/EjemploWSS/src/main/java/" 
+			destImplDir="/home/yoya/workspace/EjemploWSS/src/main/java/" 
+			packageName="generated"
+			explode="true"
+			
+			
+			type="JAXWS" />
+	</target>
+	
+	
+	<target name="deploy">
+		<!--add wldeploy task here -->
+	</target>
+</project>

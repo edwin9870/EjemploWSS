@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions xmlns:tns="http://www.example.org/Edwin/"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	name="Edwin" targetNamespace="http://www.example.org/Edwin/"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+
+	<wsdl:types>
+		<xsd:schema targetNamespace="http://www.example.org/Edwin/">
+			<xsd:element name="mensaje" type="xsd:string"></xsd:element>
+			<xsd:element name="mensajeResponse" type="xsd:string"></xsd:element>
+		</xsd:schema>
+	</wsdl:types>
+
+	<wsdl:message name="getMensajitoRequest">
+		<wsdl:part name="mensaje" element="tns:mensaje" />
+	</wsdl:message>
+	<wsdl:message name="getMensajitoResponse">
+		<wsdl:part name="mensaje" element="tns:mensajeResponse" />
+	</wsdl:message>
+
+	<wsdl:portType name="Edwin_PortType">
+		<wsdl:operation name="mensajito">
+			<wsdl:input message="tns:getMensajitoRequest" />
+			<wsdl:output message="tns:getMensajitoResponse" />
+		</wsdl:operation>
+	</wsdl:portType>
+
+	<wsdl:binding name="Edwin_Binding" type="tns:Edwin_PortType">
+		<soap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="mensajito">
+			<soap:operation soapAction="mensajito" />
+			<wsdl:input>
+				<soap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+					use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+					use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+
+
+	<wsdl:service name="Edwin_Servicesss">
+		<wsdl:port name="Edwin_Port" binding="tns:Edwin_Binding">
+			<soap:address location="http://www.example.org/mensajito/"/>
+		</wsdl:port>
+	</wsdl:service>
+
+</wsdl:definitions>
+	
+	
+
